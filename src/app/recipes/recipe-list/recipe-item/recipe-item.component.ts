@@ -9,18 +9,8 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./recipe-item.component.css']
 })
 export class RecipeItemComponent implements OnInit {
-  @Input('recipeItem') recipe:Recipe;
+  @Input('recipeItem') recipe: Recipe;
+  @Input() index: number;
 
-  constructor(private recipeService: RecipeService,
-    private router:Router,
-    private route: ActivatedRoute) { }
-
-  ngOnInit() {
-  }
-
-  onSelected(){
-   // this.recipeService.recipeSelected.emit(this.recipe);
-    this.router.navigate([this.recipe.name],{relativeTo: this.route});
-  }
-
+  ngOnInit() {}
 }
