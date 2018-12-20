@@ -5,6 +5,7 @@ import { Ingredient } from '../shared/ingredient.model';
 import { Subject } from 'rxjs';
 @Injectable()
 export class RecipeService {
+  url = '';
   recipesChanged = new Subject<Recipe[]>();
   constructor(private shoppingListService: ShoppingListService) {}
 
@@ -22,6 +23,11 @@ export class RecipeService {
       [new Ingredient('Buns', 2), new Ingredient('Meat', 1)]
     )
   ];
+
+  setRecipes(recipes: Recipe[]){
+    this.recipes =recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
 
   getRecipes() {
     return this.recipes.slice(); //slice return an exact copy of the array

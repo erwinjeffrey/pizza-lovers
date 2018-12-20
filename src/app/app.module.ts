@@ -1,8 +1,10 @@
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app.routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -16,12 +18,29 @@ import { DropdownDirective } from './shared/dropdown.directive';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeService } from './recipes/recipe.service';
+import { DataStorageService } from './shared/data.storage.service';
 
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, RecipesComponent, RecipeListComponent, RecipeDetailComponent, RecipeItemComponent, ShoppingListComponent, ShoppingEditComponent, DropdownDirective, RecipeStartComponent, RecipeEditComponent],
-  imports: [BrowserModule,FormsModule,AppRoutingModule, ReactiveFormsModule],
-  providers: [ShoppingListService,RecipeService],
+  declarations: [
+    AppComponent,
+     HeaderComponent, 
+     RecipesComponent, 
+     RecipeListComponent, 
+     RecipeDetailComponent,
+     RecipeItemComponent, 
+     ShoppingListComponent, 
+     ShoppingEditComponent,
+     DropdownDirective, 
+     RecipeStartComponent, 
+     RecipeEditComponent],
+
+  imports: [BrowserModule,
+            FormsModule,
+            AppRoutingModule, 
+            ReactiveFormsModule,
+            HttpClientModule],
+  providers: [ShoppingListService,RecipeService, DataStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
