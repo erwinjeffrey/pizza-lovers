@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { Recipe } from './../recipes/recipe.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -8,16 +9,19 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class DataStorageService{
-  url = 'https://ng-recipe-book-6bf67.firebaseio.com/recipes.json';
+  url = 'https://ng-recipe-book-6bf67.firebaseio.com/recipes.json?auth=';
 
-  constructor(private http:HttpClient, private recipeService: RecipeService){}
+  constructor(private http:HttpClient, private recipeService: RecipeService,private authService: AuthService){}
   recipes: Recipe[];
   storeRecipes(){
-    return this.http.put(this.url, this.recipeService.getRecipes());
+    const token = this.authService.getToken();
+    return this.http.put(this.url + token, this.recipeService.getRecipes());
   }
 
   getStoreRecipes(){
-    this.http.get(this.url)
+    const token = this.authService.getToken();
+    // send the request with the token to recognize that the user is login (auth=)
+    this.http.get(this.url + token)
     .pipe(
       map(
         (response: Response) =>{

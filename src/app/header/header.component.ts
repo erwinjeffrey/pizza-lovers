@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { DataStorageService } from './../shared/data.storage.service';
 import { Component, Output, EventEmitter } from '@angular/core';
 
@@ -6,7 +7,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
   templateUrl: './header.component.html'
 })
 export class HeaderComponent {
-  constructor(private dataStorageService: DataStorageService){}
+  constructor(private dataStorageService: DataStorageService,private authService: AuthService){}
 
   @Output() featureSelected = new EventEmitter<string>();
   onSelect(feature:string){
@@ -21,5 +22,9 @@ export class HeaderComponent {
   }
   onFechData(){
     this.dataStorageService.getStoreRecipes();
+  }
+
+  onLogout(){
+    this.authService.logout();
   }
 }
