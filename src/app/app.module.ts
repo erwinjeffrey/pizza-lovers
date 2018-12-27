@@ -13,18 +13,20 @@ import { RecipeService } from './recipes/recipe.service';
 import { DataStorageService } from './shared/data.storage.service';
 import { RecipesModule } from './recipes/recipes.module';
 import { SharedModule } from './shared/shared.module';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent],
+    HeaderComponent,
+    HomeComponent],
 
   imports: [
     BrowserModule,// include all the feature of the commonModule and many things else
     AppRoutingModule, 
     HttpClientModule,
-    RecipesModule,
+    //just removed recipesModule to load it lazily instead of eargily(when the route is visited)
     SharedModule,
     ShoppingListModule,
     AuthModule

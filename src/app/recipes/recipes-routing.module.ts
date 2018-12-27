@@ -8,7 +8,7 @@ import { NgModule } from '@angular/core';
 
 const recipesRoutes: Routes = [
     {
-        path: 'recipes',
+        path: '',
         component: RecipesComponent,
         children: [
           { path: '', component: RecipeStartComponent },
