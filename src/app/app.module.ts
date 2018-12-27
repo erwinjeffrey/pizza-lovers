@@ -1,8 +1,12 @@
+import { AuthGuard } from './auth/auth-guard.service';
+import { AuthService } from './auth/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app.routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -15,11 +19,32 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { DropdownDirective } from './shared/dropdown.directive';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { RecipeService } from './recipes/recipe.service';
+import { DataStorageService } from './shared/data.storage.service';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
+
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, RecipesComponent, RecipeListComponent, RecipeDetailComponent, RecipeItemComponent, ShoppingListComponent, ShoppingEditComponent, DropdownDirective, RecipeStartComponent, RecipeEditComponent],
-  imports: [BrowserModule,FormsModule,AppRoutingModule],
-  providers: [ShoppingListService],
+  declarations: [
+    AppComponent,
+     HeaderComponent, 
+     RecipesComponent, 
+     RecipeListComponent, 
+     RecipeDetailComponent,
+     RecipeItemComponent, 
+     ShoppingListComponent, 
+     ShoppingEditComponent,
+     DropdownDirective, 
+     RecipeStartComponent, 
+     RecipeEditComponent, SignupComponent, SigninComponent],
+
+  imports: [BrowserModule,
+            FormsModule,
+            AppRoutingModule, 
+            ReactiveFormsModule,
+            HttpClientModule],
+  providers: [ShoppingListService,RecipeService, DataStorageService,AuthService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
