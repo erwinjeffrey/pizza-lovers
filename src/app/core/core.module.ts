@@ -7,6 +7,7 @@ import { AuthService } from '../auth/auth.service';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { RecipeService } from '../recipes/recipe.service';
 import { DataStorageService } from '../shared/data.storage.service';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
@@ -15,12 +16,14 @@ import { DataStorageService } from '../shared/data.storage.service';
     ],
     imports: [
         SharedModule,
-        AppRoutingModule
+        AppRoutingModule,
+        RouterModule
     ],
     exports: [
         AppRoutingModule,
-        HeaderComponent
+        HeaderComponent,
+        RouterModule
     ],
-    providers: [ShoppingListService,RecipeService, DataStorageService,AuthService]
+    providers: [ShoppingListService, RecipeService, DataStorageService, AuthService]
 })
-export class CoreModule{}
+export class CoreModule { }
