@@ -2,31 +2,32 @@ import { AuthService } from '../../auth/auth.service';
 import { DataStorageService } from '../../shared/data.storage.service';
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Recipe } from 'src/app/recipes/recipe.model';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html'
 })
 export class HeaderComponent {
-  constructor(private dataStorageService: DataStorageService,
+  constructor(
+    private dataStorageService: DataStorageService,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute
+  ) {}
 
   @Output() featureSelected = new EventEmitter<string>();
   onSelect(feature: string) {
     this.featureSelected.emit(feature);
   }
 
-  isAuthenticated(){
+  isAuthenticated() {
     return this.authService.isAuthenticated();
   }
   onSaveData() {
-    this.dataStorageService.storeRecipes()
-      .subscribe(
-        (response: Response) => {
-          console.log(response);
-        });
+    this.dataStorageService.storeRecipes().subscribe(response => {
+      console.log(response);
+    });
   }
   onFechData() {
     this.dataStorageService.getStoreRecipes();
