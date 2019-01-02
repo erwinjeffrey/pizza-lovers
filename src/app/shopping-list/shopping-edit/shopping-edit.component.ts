@@ -1,3 +1,4 @@
+import { shoppingListActions } from './../ngrxStore/shopping-list.actions';
 import * as ShoppingListActions from '../ngrxStore/shopping-list.actions';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -40,7 +41,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     const value = form.value;
     const newIngredient = new Ingredient(value.name,value.amount);
     if(this.editMode){
-      this.shoppingListService.updateIngredient(this.editedItemIndex, newIngredient);
+      this.store.dispatch(new ShoppingListActions.UpdateIngredient({index:this.editedItemIndex,ingredient:newIngredient}));
+      //this.shoppingListService.updateIngredient(this.editedItemIndex, newIngredient);
     }else{ 
       //passing value to the store
       this.store.dispatch(new ShoppingListActions.AddIngredient(newIngredient));
@@ -56,7 +58,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   }
 
   onDelete(){
-    this.shoppingListService.deleteIngredient(this.editedItemIndex);
+    this.store.dispatch(new ShoppingListActions.DeleteIngredient(this.editedItemIndex));
+    //this.shoppingListService.deleteIngredient(this.editedItemIndex);
     this.editMode = false;
     this.onClear();
   }

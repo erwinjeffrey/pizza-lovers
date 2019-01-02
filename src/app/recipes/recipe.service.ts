@@ -3,11 +3,12 @@ import { Recipe } from './recipe.model';
 import { Injectable } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { Subject } from 'rxjs';
-@Injectable()
+import { Store } from '@ngrx/store';
+
 export class RecipeService {
   url = '';
   recipesChanged = new Subject<Recipe[]>();
-  constructor(private shoppingListService: ShoppingListService) {}
+  constructor() {}
 
   private recipes: Recipe[] = [
     new Recipe(
@@ -31,10 +32,6 @@ export class RecipeService {
 
   getRecipes() {
     return this.recipes.slice(); //slice return an exact copy of the array
-  }
-
-  addIngredientsToShoppingList(ingredients: Ingredient[]) {
-    this.shoppingListService.addIngredients(ingredients);
   }
 
   getRecipe(index: number) {
