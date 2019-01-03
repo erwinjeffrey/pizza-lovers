@@ -1,29 +1,32 @@
+import { Store } from '@ngrx/store';
+import  * as fromApp from  './../../store/app.reducers';
+import * as fromAuth from '../../auth/ngrxStore/auth.reducers';
 import { AuthService } from '../../auth/auth.service';
 import { DataStorageService } from '../../shared/data.storage.service';
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Recipe } from 'src/app/recipes/recipe.model';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
+  authState: Observable<fromAuth.State>;
+
   constructor(
     private dataStorageService: DataStorageService,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store<fromApp.AppState>
   ) {}
 
-  @Output() featureSelected = new EventEmitter<string>();
-  onSelect(feature: string) {
-    this.featureSelected.emit(feature);
+  ngOnInit(){
+    this.authState = this.store.select('auth');
   }
 
-  isAuthenticated() {
-    return this.authService.isAuthenticated();
-  }
   onSaveData() {
     this.dataStorageService.storeRecipes().subscribe(response => {
       console.log(response);
@@ -36,5 +39,6 @@ export class HeaderComponent {
   onLogout() {
     this.authService.logout();
     this.router.navigate(['/recipes'], { relativeTo: this.route });
+    
   }
 }
