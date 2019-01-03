@@ -1,7 +1,7 @@
+import * as AuthActions from './../../auth/ngrxStore/auth.actions';
 import { Store } from '@ngrx/store';
 import  * as fromApp from  './../../store/app.reducers';
 import * as fromAuth from '../../auth/ngrxStore/auth.reducers';
-import { AuthService } from '../../auth/auth.service';
 import { DataStorageService } from '../../shared/data.storage.service';
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -37,8 +37,7 @@ export class HeaderComponent implements OnInit{
   }
 
   onLogout() {
-    this.authService.logout();
-    this.router.navigate(['/recipes'], { relativeTo: this.route });
-    
+    this.store.dispatch(new AuthActions.Logout());
+    //this.router.navigate(['/recipes'], { relativeTo: this.route });
   }
 }

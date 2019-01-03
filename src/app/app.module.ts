@@ -1,3 +1,4 @@
+import { AuthEffects } from './auth/ngrxStore/auth.effects';
 import { reducers } from './store/app.reducers';
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
@@ -9,6 +10,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { CoreModule } from './core/core.module';
     ShoppingListModule,
     AuthModule,
     CoreModule,
-    StoreModule.forRoot(reducers)
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([AuthEffects])
   ],
   bootstrap: [AppComponent]
 })
