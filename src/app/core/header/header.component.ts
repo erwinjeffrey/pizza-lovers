@@ -1,29 +1,24 @@
 import * as AuthActions from './../../auth/ngrxStore/auth.actions';
 import { Store } from '@ngrx/store';
-import  * as fromApp from  './../../store/app.reducers';
+import * as fromApp from './../../store/app.reducers';
 import * as fromAuth from '../../auth/ngrxStore/auth.reducers';
 import { DataStorageService } from '../../shared/data.storage.service';
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html'
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
   authState: Observable<fromAuth.State>;
 
   constructor(
     private dataStorageService: DataStorageService,
-    private authService: AuthService,
-    private router: Router,
-    private route: ActivatedRoute,
     private store: Store<fromApp.AppState>
   ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.authState = this.store.select('auth');
   }
 
@@ -38,6 +33,5 @@ export class HeaderComponent implements OnInit{
 
   onLogout() {
     this.store.dispatch(new AuthActions.Logout());
-    //this.router.navigate(['/recipes'], { relativeTo: this.route });
   }
 }
