@@ -11,6 +11,8 @@ import { RecipesRoutingModule } from './recipes-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { recipeReducer } from './ngrxStore/recipe.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { RecipeEffects } from './ngrxStore/recipe.effects';
 
 @NgModule({
     declarations:[
@@ -27,7 +29,8 @@ import { recipeReducer } from './ngrxStore/recipe.reducers';
         RecipesRoutingModule,
         SharedModule,
         //as we load the recipes feature lazily we do need to use forFeature to register our reducers instead of forRoot
-        StoreModule.forFeature('recipes', recipeReducer)
+        StoreModule.forFeature('recipes', recipeReducer),
+        EffectsModule.forFeature([RecipeEffects])
     ]
 })
 export class RecipesModule{}
