@@ -12,15 +12,15 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
 
   imports: [
-    BrowserModule,// include all the feature of the commonModule and many things else
-    AppRoutingModule, 
+    BrowserModule, // include all the feature of the commonModule and many things else
+    AppRoutingModule,
     HttpClientModule,
     //just removed recipesModule to load it lazily instead of eargily(when the route is visited)
     SharedModule,
@@ -29,7 +29,8 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     CoreModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AuthEffects]),
-    StoreRouterConnectingModule
+    StoreRouterConnectingModule,
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   bootstrap: [AppComponent]
 })
