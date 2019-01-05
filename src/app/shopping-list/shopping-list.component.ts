@@ -1,7 +1,7 @@
 import * as ShoppinglistActions from './ngrxStore/shopping-list.actions';
 import * as fromApp from '../store/app.reducers';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Ingredient } from '../shared/ingredient.model';
 

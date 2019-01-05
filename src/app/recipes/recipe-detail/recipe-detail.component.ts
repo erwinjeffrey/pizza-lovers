@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/';
+import { take } from 'rxjs/operators';
+
 import * as shoppingListActions from '../../shopping-list/ngrxStore/shopping-list.actions';
 import * as fromRecipe from '../ngrxStore/recipe.reducers';
-import { Observable } from 'rxjs/Observable';
 import * as RecipeActions from './../ngrxStore/recipe.actions';
-
 
 @Component({
   selector: 'app-recipe-detail',
@@ -30,13 +31,16 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   onAddToShoppingList() {
-    this.store.select('recipes')
-      .take(1)
-      .subscribe((recipeState: fromRecipe.State) =>{
-        this.store.dispatch(new shoppingListActions.AddIngredients(
-          recipeState.recipes[this.id].ingredients)
+    this.store
+      .select('recipes')
+      .pipe(take(1))
+      .subscribe((recipeState: fromRecipe.State) => {
+        this.store.dispatch(
+          new shoppingListActions.AddIngredients(
+            recipeState.recipes[this.id].ingredients
           )
-      })
+        );
+      });
   }
 
   onEditRecipe() {
@@ -46,7 +50,7 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   onDeleteRecipe() {
-   this.store.dispatch(new RecipeActions.DeleteRecipe(this.id));
+    this.store.dispatch(new RecipeActions.DeleteRecipe(this.id));
     this.router.navigate(['/recipes']);
   }
 }

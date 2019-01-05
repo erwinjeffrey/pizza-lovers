@@ -4,7 +4,7 @@ import {
   HttpHandler,
   HttpEvent
 } from '@angular/common/http';
-import { Observable } from 'rxjs/';
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 export class LogginInterceptor implements HttpInterceptor {

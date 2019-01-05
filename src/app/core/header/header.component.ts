@@ -1,6 +1,7 @@
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+
 import * as AuthActions from './../../auth/ngrxStore/auth.actions';
 import * as fromApp from './../../store/app.reducers';
 import * as fromAuth from '../../auth/ngrxStore/auth.reducers';
@@ -20,7 +21,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onSaveData() {
-    this.store.dispatch(new RecipeActions.StoreRecipes())
+    this.store.dispatch(new RecipeActions.StoreRecipes());
   }
   onFechData() {
     this.store.dispatch(new RecipeActions.FetchRecipes());
